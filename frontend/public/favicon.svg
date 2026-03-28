@@ -1,0 +1,100 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hexbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3a3a3a"/>
+      <stop offset="100%" stop-color="#1f1f1f"/>
+    </linearGradient>
+    <linearGradient id="hexborder" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5a623" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#e58f12" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#f5a623" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="vlo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#d98711"/>
+    </linearGradient>
+    <linearGradient id="vli" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d0d0cd"/>
+      <stop offset="100%" stop-color="#9e9e9a"/>
+    </linearGradient>
+    <linearGradient id="vri" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b5b5b1"/>
+      <stop offset="100%" stop-color="#7e7e7a"/>
+    </linearGradient>
+    <linearGradient id="vro" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#b7710e"/>
+    </linearGradient>
+    <linearGradient id="rimL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffd58b" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f5a623" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="rimR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cfcfcb" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#f5a623" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="tipglow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="4" result="g"/>
+      <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="hexglow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="g"/>
+      <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <polygon points="100,14 174,57 174,143 100,186 26,143 26,57" fill="url(#hexbg)"/>
+
+  <polygon points="100,14 174,57 174,143 100,186 26,143 26,57" fill="none" stroke="#f5a623" stroke-width="4" opacity="0.24" filter="url(#hexglow)"/>
+  <polygon points="100,14 174,57 174,143 100,186 26,143 26,57" fill="none" stroke="url(#hexborder)" stroke-width="1.2"/>
+
+  <polygon points="100,22 167,62 167,138 100,178 33,138 33,62" fill="none" stroke="#f5a623" stroke-width="0.5" opacity="0.22"/>
+
+  <g opacity="0.55" filter="url(#bloom)">
+    <polygon points="36,42 80,42 100,158" fill="#f5a623"/>
+    <polygon points="120,42 164,42 100,158" fill="#8a8a86"/>
+  </g>
+
+  <polygon points="36,42 58,42 100,158" fill="url(#vlo)"/>
+  <polygon points="58,42 80,42 100,158" fill="url(#vli)"/>
+  <polygon points="120,42 142,42 100,158" fill="url(#vri)"/>
+  <polygon points="142,42 164,42 100,158" fill="url(#vro)"/>
+
+  <line x1="58" y1="42" x2="100" y2="158" stroke="#d8d8d5" stroke-width="0.7" opacity="0.48"/>
+  <line x1="142" y1="42" x2="100" y2="158" stroke="#d8d8d5" stroke-width="0.7" opacity="0.3"/>
+
+  <line x1="36" y1="42" x2="80" y2="42" stroke="url(#rimL)" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="120" y1="42" x2="164" y2="42" stroke="url(#rimR)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <line x1="36" y1="42" x2="80" y2="42" stroke="#ffdca2" stroke-width="0.8" opacity="0.62" stroke-linecap="round"/>
+  <line x1="120" y1="42" x2="164" y2="42" stroke="#d0d0cd" stroke-width="0.8" opacity="0.52" stroke-linecap="round"/>
+
+  <circle cx="100" cy="158" r="5" fill="#f5a623" opacity="0.4" filter="url(#tipglow)"/>
+  <circle cx="100" cy="158" r="2.5" fill="#ffe0ad"/>
+  <circle cx="100" cy="158" r="1.2" fill="#ffffff"/>
+
+  <circle cx="100" cy="14" r="2" fill="#f5a623" opacity="0.8"/>
+  <circle cx="174" cy="57" r="2" fill="#f5a623" opacity="0.62"/>
+  <circle cx="174" cy="143" r="2" fill="#8f8f8b" opacity="0.62"/>
+  <circle cx="100" cy="186" r="2" fill="#f5a623" opacity="0.8"/>
+  <circle cx="26" cy="143" r="2" fill="#8f8f8b" opacity="0.62"/>
+  <circle cx="26" cy="57" r="2" fill="#f5a623" opacity="0.62"/>
+
+  <circle cx="48" cy="88" r="1.2" fill="#c8c8c4" opacity="0.45"/>
+  <circle cx="44" cy="116" r="0.8" fill="#f5a623" opacity="0.5"/>
+  <circle cx="155" cy="80" r="1" fill="#f5a623" opacity="0.4"/>
+  <circle cx="152" cy="118" r="0.8" fill="#8f8f8b" opacity="0.45"/>
+  <circle cx="72" cy="170" r="1" fill="#b5b5b1" opacity="0.4"/>
+  <circle cx="128" cy="172" r="1" fill="#f5a623" opacity="0.4"/>
+  <circle cx="86" cy="28" r="0.8" fill="#d0d0cd" opacity="0.4"/>
+  <circle cx="114" cy="28" r="0.8" fill="#d0d0cd" opacity="0.4"/>
+
+  <line x1="26" y1="57" x2="36" y2="63" stroke="#f5a623" stroke-width="0.8" opacity="0.5"/>
+  <line x1="174" y1="57" x2="164" y2="63" stroke="#f5a623" stroke-width="0.8" opacity="0.5"/>
+  <line x1="26" y1="143" x2="36" y2="137" stroke="#8f8f8b" stroke-width="0.8" opacity="0.4"/>
+  <line x1="174" y1="143" x2="164" y2="137" stroke="#8f8f8b" stroke-width="0.8" opacity="0.4"/>
+</svg>
