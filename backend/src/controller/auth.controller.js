@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken"
 import { sendEmail } from "../services/mail.service.js"
 import { getRedisClient, initRedis, isRedisConnected } from "../config/redis.js"
 
+const BACKEND_PUBLIC_URL = process.env.BACKEND_PUBLIC_URL || 'https://veltrix-bn4b.onrender.com'
+const FRONTEND_PUBLIC_URL = process.env.FRONTEND_URL || 'https://veltrix-bn4b.onrender.com'
+
 export const userregister = async (req, res) => {
     console.log(req.body);
     try {
@@ -46,7 +49,7 @@ export const userregister = async (req, res) => {
                 "Test Email",
                 '<p>Hii ' + username + `,</p>`
                 + '<p>Thank you for registering on our website. Please click the link below to verify your email address:</p>'
-                + `<a href="http://localhost:3000/api/auth/verify-email?token=${emailverificationtoken}">Verify Email</a>`
+                + `<a href="${BACKEND_PUBLIC_URL}/api/auth/verify-email?token=${emailverificationtoken}">Verify Email</a>`
 
 
 
@@ -108,7 +111,7 @@ export const verifyemail = async (req, res) => {
             return res.status(200).send(`
                 <h1>Email already verified</h1>
                 <p>Your account is already verified. You can log in now.</p>
-                <a href="http://localhost:3000/login">Go to Login</a>
+                <a href="${FRONTEND_PUBLIC_URL}/#/login">Go to Login</a>
             `)
         }
 
@@ -118,7 +121,7 @@ export const verifyemail = async (req, res) => {
         return res.status(200).send(`
             <h1>Email verified successfully</h1>
             <p>Thank you for verifying your email address. You can now log in to your account.</p>
-            <a href="http://localhost:3000/login">Go to Login</a>
+            <a href="${FRONTEND_PUBLIC_URL}/#/login">Go to Login</a>
         `)
     } catch (error) {
         return res.status(400).json({

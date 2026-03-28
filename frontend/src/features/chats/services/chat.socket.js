@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client'
 
-const SOCKET_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+const SOCKET_URL = import.meta.env.VITE_BACKEND_URL || 'https://veltrix-bn4b.onrender.com';
 let socketInstance = null;
 
 export const initializeSocketConnection = () => {

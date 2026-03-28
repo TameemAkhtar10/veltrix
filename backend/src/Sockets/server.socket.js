@@ -3,7 +3,7 @@ import { Server } from 'socket.io'
 let io;
 
 export const initSocket = (httpServer) => {
-    const clientOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const clientOrigin = process.env.FRONTEND_URL || 'https://veltrix-bn4b.onrender.com';
 
     io = new Server(httpServer, {
         cors: {
