@@ -1,19 +1,27 @@
-import {Resend} from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from 'nodemailer';
 
 export const sendEmail = async (to, subject, html, text) => {
+    const transporter = nodemailer.createTransport({
+        host: process.env.BREVO_SMTP_HOST,
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.BREVO_SMTP_USER,
+            pass: process.env.BREVO_SMTP_PASS,
+        },
+    });
+
     try {
-        const response = await resend.emails.send({
-            from: 'onboarding@resend.dev',
+        const result = await transporter.sendMail({
+            from: process.env.BREVO_SENDER_EMAIL,
             to: to,
             subject: subject,
             html: html,
             text: text || '',
         });
 
-        console.log('Email sent:', response?.id || response?.data?.id);
-        return response;
+        console.log('Email sent:', result.messageId);
+        return result;
     } catch (error) {
         console.error('Error sending email:', error);
         throw error;
