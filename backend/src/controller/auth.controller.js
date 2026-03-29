@@ -32,7 +32,11 @@ export const userregister = async (req, res) => {
             password
         })
 
-        let emailverificationtoken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" })
+        let emailverificationtoken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "24h" })
+        user.emailVerificationToken = emailverificationtoken
+        user.emailVerificationTokenExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000)
+        await user.save()
+
         res.cookie("TOKEN", emailverificationtoken, {
             httpOnly: true
         })
@@ -49,7 +53,7 @@ export const userregister = async (req, res) => {
                 "Verify your account",
                 '<p>Hii ' + username + `,</p>`
                 + '<p>Thank you for registering on our website. Please click the link below to verify your email address:</p>'
-                + `<a href="${BACKEND_PUBLIC_URL}/api/auth/verify-email?token=${emailverificationtoken}">Verify Email</a>`
+                + `<a href="${FRONTEND_PUBLIC_URL}/verify-email?token=${encodeURIComponent(emailverificationtoken)}">Verify Email</a>`
 
 
 
@@ -62,7 +66,7 @@ export const userregister = async (req, res) => {
         }
 
         return res.status(201).json({
-            message: "User registered successfully",
+            message: "Account created. Please verify your email.",
             success: true,
             user: {
                 username: user.username,
@@ -75,8 +79,16 @@ export const userregister = async (req, res) => {
 
         console.error("Error in user registration:", error)
 
+        if (error?.name === 'ValidationError' || error?.code === 11000) {
+            return res.status(400).json({
+                message: error.message || "User creation failed",
+                success: false,
+                err: error.message
+            })
+        }
+
         return res.status(500).json({
-            message: "Internal server error",
+            message: error.message || "Internal server error",
             success: false,
             err: error.message
         })
@@ -107,6 +119,20 @@ export const verifyemail = async (req, res) => {
             })
         }
 
+        if (user.emailVerificationToken !== token) {
+            return res.status(400).json({
+                message: "Invalid verification token",
+                success: false
+            })
+        }
+
+        if (!user.emailVerificationTokenExpiresAt || user.emailVerificationTokenExpiresAt < new Date()) {
+            return res.status(400).json({
+                message: "Verification token has expired",
+                success: false
+            })
+        }
+
         if (user.verified) {
             return res.status(200).send(`
                 <h1>Email already verified</h1>
@@ -116,6 +142,8 @@ export const verifyemail = async (req, res) => {
         }
 
         user.verified = true
+        user.emailVerificationToken = null
+        user.emailVerificationTokenExpiresAt = null
         await user.save()
 
         return res.status(200).send(`
