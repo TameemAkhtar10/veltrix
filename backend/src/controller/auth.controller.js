@@ -53,7 +53,7 @@ export const userregister = async (req, res) => {
                 "Verify your account",
                 '<p>Hii ' + username + `,</p>`
                 + '<p>Thank you for registering on our website. Please click the link below to verify your email address:</p>'
-                + `<a href="${FRONTEND_PUBLIC_URL}/verify-email?token=${encodeURIComponent(emailverificationtoken)}">Verify Email</a>`
+                + `<a href="${BACKEND_PUBLIC_URL}/api/auth/verify-email?token=${encodeURIComponent(emailverificationtoken)}">Verify Email</a>`
 
 
 
