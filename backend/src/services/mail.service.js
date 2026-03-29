@@ -14,7 +14,7 @@ export const sendEmail = async (to, subject, html, text) => {
                 to: [{ email: to }],
                 subject: subject,
                 htmlContent: html,
-                textContent: text || '',
+                textContent: text || 'Please verify your account.',
             }),
         });
 
