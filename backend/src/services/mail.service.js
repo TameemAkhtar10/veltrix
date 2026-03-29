@@ -18,12 +18,14 @@ export const sendEmail = async (to, subject, html, text) => {
             }),
         });
 
-        const data = await response.json();
-
         if (!response.ok) {
-            console.error('Brevo API error:', data);
-            throw new Error('Failed to send email via Brevo API');
+            const errorData = await response.json();
+            console.error('Brevo API error status:', response.status);
+            console.error('Brevo API error body:', JSON.stringify(errorData));
+            throw new Error(JSON.stringify(errorData));
         }
+
+        const data = await response.json();
 
         console.log('Email sent:', data.messageId);
         return data;
