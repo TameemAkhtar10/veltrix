@@ -46,7 +46,7 @@ export const userregister = async (req, res) => {
 
             await sendEmail(
                 email,
-                "Test Email",
+                "Verify your account",
                 '<p>Hii ' + username + `,</p>`
                 + '<p>Thank you for registering on our website. Please click the link below to verify your email address:</p>'
                 + `<a href="${BACKEND_PUBLIC_URL}/api/auth/verify-email?token=${emailverificationtoken}">Verify Email</a>`
@@ -57,7 +57,7 @@ export const userregister = async (req, res) => {
 
         } catch (mailError) {
 
-            console.log("Email failed but user created:", mailError.message)
+            console.error("Email failed but user created:", mailError)
 
         }
 
